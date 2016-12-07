@@ -1,0 +1,69 @@
+75mb
+Finished with 5 collections
+alloc in gc called 15333862
+false marked in hash 2562619 
+hash size 2625374 
+true marked in hash 62755
+
+85mb
+Finished with 5 collections
+alloc in gc called 15333862
+false marked in hash 2816925 
+hash size 2986333 
+true marked in hash 169408 
+
+100mb
+Finished with 4 collections
+alloc in gc called 15333862
+false marked in hash 3486884 
+hash size 3501972 
+true marked in hash 15088 
+
+130mb
+Finished with 3 collections
+alloc in gc called 15333862
+false marked in hash 4425928 
+hash size 4555870 
+true marked in hash 129942 
+
+160mb
+Finished with 2 collections
+alloc in gc called 15333862
+false marked in hash 5596231 
+hash size 5596373 
+true marked in hash 142 
+
+220mb
+Finished with 1 collections
+alloc in gc called 15333862
+false marked in hash 7693035 
+hash size 7693098 
+true marked in hash 63
+
+300mb
+Finished with 1 collections
+alloc in gc called 15333862
+false marked in hash 10476124 
+hash size 10483200 
+true marked in hash 7076 
+
+350mb
+Finished with 1 collections
+alloc in gc called 15333862 
+false marked in hash 12188796 
+hash size 12231168 
+true marked in hash 42372 
+
+400mb
+Finished with 1 collections
+alloc in gc called 15333862 
+false marked in hash 13892042 
+hash size 13977600 
+true marked in hash 85558 
+
+450mb
+Finished with 0 collections
+alloc in gc called 15333862 
+false marked in hash 15333862 
+hash size 15333862 
+true marked in hash 0 

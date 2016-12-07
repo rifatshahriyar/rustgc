@@ -1,0 +1,36 @@
+-------------------------------------------------------------------------------
+heap is 471859200 bytes (immix: 377487360 bytes, lo: 94371840 bytes) . 
+number of gc threads are 8 
+Garbage Collector Test
+ Live storage will peak at 10291408 bytes.
+
+ Stretching memory with a binary tree or depth 18
+ Creating a long-lived binary tree of depth 16
+ Creating a long-lived array of 500000 doubles
+creating 33824 trees of depth 4
+	Top down construction took 339 msec
+	Buttom up construction took 455 msec
+creating 8256 trees of depth 6
+	Top down construction took 390 msec
+	Buttom up construction took 380 msec
+creating 2052 trees of depth 8
+	Top down construction took 261 msec
+	Buttom up construction took 331 msec
+creating 512 trees of depth 10
+	Top down construction took 727 msec
+	Buttom up construction took 259 msec
+creating 128 trees of depth 12
+	Top down construction took 265 msec
+	Buttom up construction took 276 msec
+creating 32 trees of depth 14
+	Top down construction took 297 msec
+	Buttom up construction took 342 msec
+creating 8 trees of depth 16
+	Top down construction took 442 msec
+	Buttom up construction took 1313 msec
+Completed in 6332 msec
+Finished with 0 collections
+alloc in gc called 15333862 
+false marked in hash 15333862 
+hash size 15333862 
+true marked in hash 0 

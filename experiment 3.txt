@@ -1,0 +1,165 @@
+75mb
+Completed in 3734 msec
+Finished with 5 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 2683171 
+true found size 34441 
+true found in used blocks 32833 
+true found in usable blocks 1630 
+false found size 2648730 
+false found in used blocks 2287266 
+false found in usable blocks 359670 
+false not in free lines 2289319 
+false in free lines 359411 
+
+
+85mb
+Completed in 3937 msec
+Finished with 5 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 3033881 
+true found size 71844 
+true found in used blocks 62412 
+true found in usable blocks 9471 
+false found size 2962037 
+false found in used blocks 507081 
+false found in usable blocks 2453273 
+false not in free lines 510668 
+false in free lines 2451369 
+
+
+100mb
+Completed in 4104 msec
+Finished with 4 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 3533573 
+true found size 8211 
+true found in used blocks 5416 
+true found in usable blocks 2816 
+false found size 3525362 
+false found in used blocks 1381169 
+false found in usable blocks 2142720 
+false not in free lines 1385026 
+false in free lines 2140336 
+
+
+
+130mb
+Completed in 4172 msec
+Finished with 3 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 4574311 
+true found size 135243 
+true found in used blocks 128426 
+true found in usable blocks 6871 
+false found size 4439068 
+false found in used blocks 1735687 
+false found in usable blocks 2702259 
+false not in free lines 1737904 
+false in free lines 2701164 
+
+
+160mb
+Completed in 3969 msec
+Finished with 2 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 5620563 
+true found size 390 
+true found in used blocks 95 
+true found in usable blocks 309 
+false found size 5620173 
+false found in used blocks 4168965 
+false found in usable blocks 1450510 
+false not in free lines 4170705 
+false in free lines 1449468 
+
+
+
+220mb
+Completed in 4473 msec
+Finished with 1 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 7704191 
+true found size 4142 
+true found in used blocks 3984 
+true found in usable blocks 170 
+false found size 7700049 
+false found in used blocks 7664789 
+false found in usable blocks 35332 
+false not in free lines 7664880 
+false in free lines 35169 
+
+
+
+300mb
+Completed in 4712 msec
+Finished with 1 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 10484725 
+true found size 9535 
+true found in used blocks 5467 
+true found in usable blocks 4076 
+false found size 10475190 
+false found in used blocks 4851775 
+false found in usable blocks 5624515 
+false not in free lines 4852871 
+false in free lines 5622319 
+
+
+
+350mb
+Completed in 4776 msec
+Finished with 1 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 12240884 
+true found size 18705 
+true found in used blocks 13663 
+true found in usable blocks 5053 
+false found size 12222179 
+false found in used blocks 3112891 
+false found in usable blocks 9111025 
+false not in free lines 3114621 
+false in free lines 9107558 
+
+
+
+400mb
+Completed in 5189 msec
+Finished with 1 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 13983007 
+true found size 89235 
+true found in used blocks 84666 
+true found in usable blocks 4608 
+false found size 13893772 
+false found in used blocks 1359977 
+false found in usable blocks 12536144 
+false not in free lines 1362550 
+false in free lines 12531222 
+
+
+
+450mb
+Finished with 0 collections
+------------------------------------------
+alloc in gc called 15333862 
+hash size 15333862 
+true found size 0 
+true found in used blocks 0 
+true found in usable blocks 0 
+false found size 15333862 
+false found in used blocks 15337296 
+false found in usable blocks 0 
+false not in free lines 15333862 
+false in free lines 0 
+
+

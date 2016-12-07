@@ -1,0 +1,36 @@
+src/heap/immix/immix_mutator.rs:                        self.block().line_mark_table_mut().set(line, immix::LineMark::FreshAlloc);
+src/heap/immix/mod.rs:pub use self::immix_space::LineMarkTable as ImmixLineMarkTable;
+src/heap/immix/mod.rs:pub enum LineMark {
+src/heap/immix/immix_space.rs:pub struct LineMarkTable {
+src/heap/immix/immix_space.rs:    ptr         : *mut immix::LineMark,
+src/heap/immix/immix_space.rs:pub struct LineMarkTableSlice {
+src/heap/immix/immix_space.rs:    ptr       : *mut immix::LineMark,
+src/heap/immix/immix_space.rs:impl LineMarkTable {
+src/heap/immix/immix_space.rs:    pub fn new(space_start: Address, space_end: Address) -> LineMarkTable {
+src/heap/immix/immix_space.rs:            let ret = unsafe {libc::malloc((mem::size_of::<immix::LineMark>() * line_mark_table_len) as libc::size_t)} as *mut immix::LineMark;
+src/heap/immix/immix_space.rs:                unsafe {*cursor = immix::LineMark::Free;}
+src/heap/immix/immix_space.rs:        LineMarkTable{space_start: space_start, ptr: line_mark_table, len: line_mark_table_len}
+src/heap/immix/immix_space.rs:    pub fn take_slice(&mut self, start: usize, len: usize) -> LineMarkTableSlice {
+src/heap/immix/immix_space.rs:        LineMarkTableSlice{ptr: unsafe {self.ptr.offset(start as isize)}, len: len}
+src/heap/immix/immix_space.rs:    fn get(&self, index: usize) -> immix::LineMark {
+src/heap/immix/immix_space.rs:    fn set(&self, index: usize, value: immix::LineMark) {
+src/heap/immix/immix_space.rs:        self.set(line_table_index, immix::LineMark::Live);
+src/heap/immix/immix_space.rs:            self.set(line_table_index + 1, immix::LineMark::ConservLive);
+src/heap/immix/immix_space.rs:        self.set(line_table_index, immix::LineMark::Live);
+src/heap/immix/immix_space.rs:            self.set(line_table_index + 1, immix::LineMark::ConservLive);
+src/heap/immix/immix_space.rs:impl LineMarkTableSlice {
+src/heap/immix/immix_space.rs:    pub fn get(&self, index: usize) -> immix::LineMark {
+src/heap/immix/immix_space.rs:    pub fn set(&mut self, index: usize, value: immix::LineMark) {
+src/heap/immix/immix_space.rs:    pub line_mark_table  : LineMarkTable,
+src/heap/immix/immix_space.rs:    line_mark_table : LineMarkTableSlice
+src/heap/immix/immix_space.rs:        let line_mark_table = LineMarkTable::new(start, end);
+src/heap/immix/immix_space.rs:                    if cur_line_mark_table.get(i) != immix::LineMark::Live && cur_line_mark_table.get(i) != immix::LineMark::ConservLive {
+src/heap/immix/immix_space.rs:                        cur_line_mark_table.set(i, immix::LineMark::Free);
+src/heap/immix/immix_space.rs:    pub fn line_mark_table(&self) -> &LineMarkTable {
+src/heap/immix/immix_space.rs:                immix::LineMark::Free => {return Some(i);},
+src/heap/immix/immix_space.rs:                immix::LineMark::Free => {i += 1;}
+src/heap/immix/immix_space.rs:    pub fn line_mark_table(&self) -> &LineMarkTableSlice {
+src/heap/immix/immix_space.rs:    pub fn line_mark_table_mut(&mut self) -> &mut LineMarkTableSlice {
+src/heap/gc/mod.rs:use heap::immix::ImmixLineMarkTable;
+src/heap/gc/mod.rs:pub fn steal_trace_object(obj: ObjectReference, local_queue: &mut Vec<ObjectReference>, job_sender: &mpsc::Sender<ObjectReference>, alloc_map: *mut u8, trace_map: *mut u8, line_mark_table: &ImmixLineMarkTable, immix_start: Address, immix_end: Address, mark_state: u8, lo_space: &Arc<RwLock<FreeListSpace>>) {
+src/heap/gc/mod.rs:pub fn trace_object(obj: ObjectReference, local_queue: &mut Vec<ObjectReference>, alloc_map: *mut u8, trace_map: *mut u8, line_mark_table: &ImmixLineMarkTable, immix_start: Address, immix_end: Address, mark_state: u8) {
