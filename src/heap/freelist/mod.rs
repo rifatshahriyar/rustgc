@@ -37,7 +37,7 @@ impl FreeListSpace {
             let ret = self::aligned_alloc::aligned_alloc(size, align);
         
             let addr = Address::from_ptr::<()>(ret);
-            println!("hello free list nigga");
+            //println!("hello free list nigga");
             self.current_nodes.push_front(Box::new(FreeListNode{id: self.node_id, start: addr, size: size, mark: NodeMark::FreshAlloc}));
             self.node_id += 1;
             self.used_bytes += size;

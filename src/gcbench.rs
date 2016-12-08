@@ -12,6 +12,7 @@ use heap::immix::myHashMap;
 use heap::immix::LineMark;
 use heap::immix::BYTES_IN_BLOCK;
 use heap::immix::LOG_BYTES_IN_LINE;
+use heap::immix::ALLOC_COUNT;
 use heap::freelist;
 use heap::freelist::FreeListSpace;
 use std::mem::size_of as size_of;
@@ -21,6 +22,7 @@ use common::Address;
 use std::sync::atomic;
 use std::sync::Arc;
 use std::collections::HashMap;
+use std::sync::atomic::{AtomicBool, Ordering,AtomicUsize};
 
 extern crate time;
 
@@ -210,43 +212,80 @@ pub fn start() {
     let mut count8 = 0;
     let mut count9 = 0;
 
+
+    let mut sanity = 0;
+    let mut insane1 = 0;
+    let mut insane2 = 0;
+    let mut insane3 = 0;
+    let mut insane4 = 0;
+
     for (key, val) in myhash.iter() {
         count = count + 1;
         //println!("iter {}",count2);
         if *val {
             count2 += 1;
+            sanity = 0;
             for element in usedBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count8 = count8+1;
+                    if sanity==0 {
+                        count8 = count8+1;
+                        sanity = 1;
+                    }
+                    else {
+                      //  println!("insane usedBlocks true");
+                        insane1 += 1;
+                    }
                 }
 
             }
+            sanity = 0;
             for element in usableBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count6 = count6+1;
+                    if sanity==0 {
+                        count6 = count6+1;
+                        sanity = 1;
+                    }
+                    else {
+                     //   println!("insane usableBlocks true");
+                        insane2 += 1;
+                    }
                 }
 
             }
         }
         else{
             count3 = count3 + 1;
+            sanity = 0;
             for element in usedBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count5 = count5+1;
+                    if sanity==0 {
+                        count5 = count5+1;
+                        sanity = 1;
+                    }
+                    else {
+                       insane3 += 1;
+                    }
                 }
 
             }
+            sanity = 0;
             for element in usableBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count7 = count7+1;
+                    if sanity==0 {
+                        count7 = count7+1;
+                        sanity = 1;
+                    }
+                    else {
+                        insane4 += 1;
+                    }
                 }
 
             }
@@ -264,7 +303,7 @@ pub fn start() {
         }
     }
     println!("------------------------------------------");
-    println!("alloc in gc called {} ", unsafe { OBJ_COUNT } );
+    println!("alloc in mutator called {} ", ALLOC_COUNT.load(Ordering::SeqCst));
     println!("hash size {} ", count);
     println!("true found size {} ", count2);
     println!("true found in used blocks {} ", count8 );
@@ -276,5 +315,11 @@ pub fn start() {
 
     println!("false not in free lines {} ",count4);
     println!("false in free lines {} ",count9);
+
+
+    println!("insane in usedblocks true {} ",insane1);
+    println!("insane in usableblocks true  {} ",insane2);
+    println!("insane in usedblocks false {} ",insane3);
+    println!("insane in usableblocks false  {} ",insane4);
 
 }

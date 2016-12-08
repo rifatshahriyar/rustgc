@@ -234,12 +234,10 @@ fn gc() {
     //println!("GC starts");
     // creates root deque
     let mut roots : &mut Vec<ObjectReference> = &mut ROOTS.write().unwrap();
-
     
-
-/*  let mut hash = &myHashMap;
+    let mut hash = &myHashMap;
     for elements in roots.iter() {
-        println!("handling root objects");
+        //println!("handling root objects");
         let addr = elements.to_address();
         let mut base = addr;
         
@@ -252,14 +250,13 @@ fn gc() {
                 hash.write().unwrap().insert(base,true);
             }
         }
+        
     }
 
-*/
     // mark & trace
     {
         let gccontext = GC_CONTEXT.read().unwrap();
         let (immix_space, lo_space) = (gccontext.immix_space.as_ref().unwrap(), gccontext.lo_space.as_ref().unwrap());
-        
         start_trace(&mut roots, immix_space.clone(), lo_space.clone());
     }
     
@@ -389,6 +386,17 @@ pub fn steal_trace_object(obj: ObjectReference, local_queue: &mut Vec<ObjectRefe
     }
     
     let mut base = addr;
+
+    let mut hash = myHashMap.write().unwrap();
+    if hash.contains_key(&base) == true {
+        let v = hash[&base];
+        if v {
+        }
+        else {
+            hash.remove(&base);
+            hash.insert(base,true);
+        }
+    }
 
     loop {
         let value = objectmodel::get_ref_byte(alloc_map, immix_start, obj);

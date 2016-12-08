@@ -23,10 +23,12 @@ use heap::freelist::FreeListSpace;
 use std::boxed::Box;
 
 use heap::immix::myHashMap;
+use heap::immix::ALLOC_COUNT;
 use heap::immix::BYTES_IN_BLOCK;
 use heap::immix::LOG_BYTES_IN_LINE;
 use std::collections::HashMap;
 use heap::immix::LineMark;
+use std::sync::atomic::AtomicUsize;
 
 #[repr(C)]
 pub struct GC {
@@ -123,6 +125,12 @@ pub extern fn myStat(){
     let mut usedBlocks = immixSpace.used_blocks.lock().unwrap();
     let mut usableBlocks = immixSpace.usable_blocks.lock().unwrap();
 
+
+
+
+
+
+
     let mut count = 0;
     let mut count2 = 0;
     let mut count3 = 0;
@@ -134,47 +142,85 @@ pub extern fn myStat(){
     let mut count9 = 0;
 
 
+    let mut sanity = 0;
+    let mut insane1 = 0;
+    let mut insane2 = 0;
+    let mut insane3 = 0;
+    let mut insane4 = 0;
+
     for (key, val) in myhash.iter() {
         count = count + 1;
         //println!("iter {}",count2);
         if *val {
             count2 += 1;
+            sanity = 0;
             for element in usedBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count8 = count8+1;
+                    if sanity==0 {
+                        count8 = count8+1;
+                        sanity = 1;
+                    }
+                    else {
+                      //  println!("insane usedBlocks true");
+                        insane1 += 1;
+                    }
                 }
 
             }
+            sanity = 0;
             for element in usableBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count6 = count6+1;
+                    if sanity==0 {
+                        count6 = count6+1;
+                        sanity = 1;
+                    }
+                    else {
+                     //   println!("insane usableBlocks true");
+                        insane2 += 1;
+                    }
                 }
 
             }
         }
         else{
             count3 = count3 + 1;
+            sanity = 0;
             for element in usedBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count5 = count5+1;
+                    if sanity==0 {
+                        count5 = count5+1;
+                        sanity = 1;
+                    }
+                    else {
+                       insane3 += 1;
+                    }
                 }
 
             }
+            sanity = 0;
             for element in usableBlocks.iter() {
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count7 = count7+1;
+                    if sanity==0 {
+                        count7 = count7+1;
+                        sanity = 1;
+                    }
+                    else {
+                        insane4 += 1;
+                    }
                 }
 
             }
-            let line_table_index = key.diff(immixSpace.start()) >> LOG_BYTES_IN_LINE;            
+            
+        }
+        let line_table_index = key.diff(immixSpace.start()) >> LOG_BYTES_IN_LINE;            
             let markValue = immixSpace.line_mark_table().get(line_table_index);
 
             if markValue != LineMark::Free {
@@ -185,9 +231,9 @@ pub extern fn myStat(){
                 count9 += 1;
             }
             
-        }
     }
     println!("------------------------------------------");
+    println!("alloc in mutator called {} ", ALLOC_COUNT.load(Ordering::SeqCst));
     println!("hash size {} ", count);
     println!("true found size {} ", count2);
     println!("true found in used blocks {} ", count8 );
@@ -199,5 +245,10 @@ pub extern fn myStat(){
 
     println!("false not in free lines {} ",count4);
     println!("false in free lines {} ",count9);
-    
+
+
+    println!("insane in usedblocks true {} ",insane1);
+    println!("insane in usableblocks true  {} ",insane2);
+    println!("insane in usedblocks false {} ",insane3);
+    println!("insane in usableblocks false  {} ",insane4);
 }

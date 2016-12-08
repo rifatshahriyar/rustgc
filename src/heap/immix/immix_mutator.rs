@@ -10,7 +10,8 @@ use common::Address;
 use std::*;
 use std::sync::Arc;
 use std::sync::RwLock;
-use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::atomic;
+use std::sync::atomic::{Ordering,AtomicUsize,AtomicBool};
 
 
 
@@ -25,6 +26,7 @@ lazy_static! {
     };
     
     pub static ref N_MUTATORS : RwLock<usize> = RwLock::new(0);
+    pub static ref ALLOC_COUNT : atomic::AtomicUsize = atomic::AtomicUsize::new(0) ;
 }
 
 #[repr(C)]
@@ -129,10 +131,14 @@ impl ImmixMutatorLocal {
         let start = self.cursor.align_up(align);
         let end = start.plus(size);
         let mut hash = &myHashMap;
+        ALLOC_COUNT.store(ALLOC_COUNT.load(atomic::Ordering::SeqCst)+1,atomic::Ordering::SeqCst);
         // println!("cursor = {:#X}, after align = {:#X}", c, start);
         
         if end > self.limit {
             let start2 = self.try_alloc_from_local(size, align);
+            if hash.write().unwrap().contains_key(&start) == true {
+                println!("*** object rewrite but why? ***");
+            }
             hash.write().unwrap().insert(start2,false);
             //hash.read();
             start2

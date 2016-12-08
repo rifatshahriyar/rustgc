@@ -38,12 +38,24 @@ fn main() {
     println!("number of gc threads are {} ", n_gcthreads);
 
 
-    //exhaust::exhaust_alloc();
-    //obj_init::alloc_init();
-    gcbench::start();
-    //mt_gcbench::start();
-    //mark::alloc_mark();
-    //trace::alloc_trace();
-    //mt_trace::alloc_trace();
+    
+    if cfg!(feature = "exhaust") {
+        exhaust::exhaust_alloc();
+    } else if cfg!(feature = "initobj") {
+        obj_init::alloc_init();
+    } else if cfg!(feature = "gcbench") {
+        gcbench::start();
+    } else if cfg!(feature = "mt-gcbench") {
+        mt_gcbench::start();
+    } else if cfg!(feature = "mark") {
+        mark::alloc_mark();
+    } else if cfg!(feature = "trace") {
+        trace::alloc_trace();
+    } else if cfg!(feature = "mt-trace") {
+        mt_trace::alloc_trace();
+    }
+    else {
+        println!("unknown features: build with 'cargo build --release --features \"exhaust\"");
+    }
 
 }

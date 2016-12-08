@@ -13,6 +13,12 @@ use heap::immix::ImmixMutatorLocal;
 use heap::immix::ImmixSpace;
 use heap::freelist;
 use heap::freelist::FreeListSpace;
+
+use heap::immix::myHashMap;
+use heap::immix::LineMark;
+use heap::immix::ALLOC_COUNT;
+use heap::immix::BYTES_IN_BLOCK;
+use heap::immix::LOG_BYTES_IN_LINE;
 use std::mem::size_of as size_of;
 
 extern crate time;
@@ -22,6 +28,8 @@ const kLongLivedTreeDepth : i32 = 16;
 const kArraySize          : i32 = 500000;
 const kMinTreeDepth       : i32 = 4;
 const kMaxTreeDepth       : i32 = 16;
+
+pub static mut OBJ_COUNT : usize = 0;
 
 struct Node {
     hdr : u64,
@@ -120,6 +128,7 @@ fn run_one_test(immix_space: Arc<ImmixSpace>, lo_space: Arc<RwLock<FreeListSpace
 fn alloc(mutator: &mut ImmixMutatorLocal) -> *mut Node {
     let addr = mutator.alloc(size_of::<Node>(), 8);
     mutator.init_object(addr, 0b1100_0011);
+    unsafe { OBJ_COUNT  = OBJ_COUNT + 1; }
     addr.to_ptr_mut::<Node>()
 }
 
@@ -203,4 +212,133 @@ pub fn start() {
     PrintDiagnostics();
     println!("Completed in {} msec", tElapsed);
     println!("Finished with {} collections", heap::gc::GC_COUNT.load(Ordering::SeqCst)); 
+
+    let mut myhash = myHashMap.write().unwrap();
+
+    let mut usedBlocks = immix_space.used_blocks.lock().unwrap();
+    let mut usableBlocks = immix_space.usable_blocks.lock().unwrap();
+    let mut freeList = lo_space.write().unwrap();
+
+    let mut count = 0;
+    let mut count2 = 0;
+    let mut count3 = 0;
+    let mut count4 = 0;
+    let mut count5 = 0;
+    let mut count6 = 0;
+    let mut count7 = 0;
+    let mut count8 = 0;
+    let mut count9 = 0;
+
+
+    let mut sanity = 0;
+    let mut insane1 = 0;
+    let mut insane2 = 0;
+    let mut insane3 = 0;
+    let mut insane4 = 0;
+
+    for (key, val) in myhash.iter() {
+        count = count + 1;
+        //println!("iter {}",count2);
+        if *val {
+            count2 += 1;
+            sanity = 0;
+            for element in usedBlocks.iter() {
+                let mut block = element;
+                let end =  block.start().plus(BYTES_IN_BLOCK);
+                if *key >= block.start() && *key <= end {
+                    if sanity==0 {
+                        count8 = count8+1;
+                        sanity = 1;
+                    }
+                    else {
+                      //  println!("insane usedBlocks true");
+                        insane1 += 1;
+                    }
+                }
+
+            }
+            sanity = 0;
+            for element in usableBlocks.iter() {
+                let mut block = element;
+                let end =  block.start().plus(BYTES_IN_BLOCK);
+                if *key >= block.start() && *key <= end {
+                    if sanity==0 {
+                        count6 = count6+1;
+                        sanity = 1;
+                    }
+                    else {
+                     //   println!("insane usableBlocks true");
+                        insane2 += 1;
+                    }
+                }
+
+            }
+        }
+        else{
+            count3 = count3 + 1;
+            sanity = 0;
+            for element in usedBlocks.iter() {
+                let mut block = element;
+                let end =  block.start().plus(BYTES_IN_BLOCK);
+                if *key >= block.start() && *key <= end {
+                    if sanity==0 {
+                        count5 = count5+1;
+                        sanity = 1;
+                    }
+                    else {
+                     //   println!("insane usedBlocks false");
+                        insane3 += 1;
+                    }
+                }
+
+            }
+            sanity = 0;
+            for element in usableBlocks.iter() {
+                let mut block = element;
+                let end =  block.start().plus(BYTES_IN_BLOCK);
+                if *key >= block.start() && *key <= end {
+                    if sanity==0 {
+                        count7 = count7+1;
+                        sanity = 1;
+                    }
+                    else {
+                     //   println!("insane usableBlocks false");
+                        insane4 += 1;
+                    }
+                }
+
+            }
+            let line_table_index = key.diff(immix_space.start()) >> LOG_BYTES_IN_LINE;            
+            let markValue = immix_space.line_mark_table().get(line_table_index);
+
+            if markValue != LineMark::Free {
+                count4 += 1;
+            }
+
+            if markValue == LineMark::Free {
+                count9 += 1;
+            }
+            
+        }
+    }
+    println!("------------------------------------------");
+    println!("alloc in mutator called {} ", ALLOC_COUNT.load(Ordering::SeqCst));
+    println!("hash size {} ", count);
+    println!("true found size {} ", count2);
+    println!("true found in used blocks {} ", count8 );
+    println!("true found in usable blocks {} ", count6 );
+
+    println!("false found size {} ", count3);
+    println!("false found in used blocks {} ", count5 );
+    println!("false found in usable blocks {} ", count7 );
+
+    println!("false not in free lines {} ",count4);
+    println!("false in free lines {} ",count9);
+
+
+    println!("insane in usedblocks true {} ",insane1);
+    println!("insane in usableblocks true  {} ",insane2);
+    println!("insane in usedblocks false {} ",insane3);
+    println!("insane in usableblocks false  {} ",insane4);
+
 }
