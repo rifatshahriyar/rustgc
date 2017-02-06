@@ -121,7 +121,7 @@ impl ImmixMutatorLocal {
     #[inline(never)]
     pub fn yieldpoint_slow(&mut self) {
         trace!("Mutator{}: yieldpoint triggered, slow path", self.id);
-    //println!("Mutator{}: yieldpoint triggered, slow path", self.id);
+        //println!("Mutator{}: yieldpoint triggered, slow path", self.id);
         gc::sync_barrier(self);
     }
     
@@ -137,9 +137,12 @@ impl ImmixMutatorLocal {
         if end > self.limit {
             let start2 = self.try_alloc_from_local(size, align);
             if hash.write().unwrap().contains_key(&start) == true {
-                println!("*** object rewrite but why? ***");
+                println!("*** object rewrite but why? {} ***",start2.as_usize());
             }
-            hash.write().unwrap().insert(start2,false);
+            if hash.write().unwrap().contains_key(&start) == false {
+                println!("*** object not rewritten {} ***",start2.as_usize());
+                hash.write().unwrap().insert(start2,false);
+            }
             //hash.read();
             start2
         } else {

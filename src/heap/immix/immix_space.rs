@@ -27,6 +27,16 @@ lazy_static! {
 
 
 
+
+lazy_static! {
+    pub static ref myHashMapForLine : RwLock<HashMap<Address,usize>> = {
+        let mut ret :HashMap<Address,usize> = HashMap::new();
+        RwLock::new(ret)
+    };
+}
+
+
+
 #[derive(Clone)]
 pub struct LineMarkTable {
     space_start : Address,

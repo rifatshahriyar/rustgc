@@ -21,7 +21,7 @@ mod obj_init;
 fn main() {
     use heap;
     objectmodel::init();
-    let heap_size : usize = 450 << 20;      // x << 20 means x megabytes  220
+    let heap_size : usize = 150 << 20;      // x << 20 means x megabytes  220
     let n_gcthreads = 8;
     
     let immix_space_size : usize = (heap_size as f64  * heap::IMMIX_SPACE_RATIO) as usize;

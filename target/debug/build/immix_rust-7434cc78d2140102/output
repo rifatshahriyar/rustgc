@@ -1,0 +1,78 @@
+TARGET = Some("x86_64-unknown-linux-gnu")
+OPT_LEVEL = Some("0")
+PROFILE = Some("debug")
+TARGET = Some("x86_64-unknown-linux-gnu")
+debug=true opt-level=0
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = None
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CFLAGS_x86_64-unknown-linux-gnu = None
+CFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CFLAGS = None
+CFLAGS = None
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-g" "-m64" "-fPIC" "-o" "/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out/src/heap/gc/clib_x64.o" "-c" "src/heap/gc/clib_x64.c"
+cargo:warning=src/heap/gc/clib_x64.c: In function ‘malloc_zero’:
+cargo:warning=src/heap/gc/clib_x64.c:6:5: warning: implicit declaration of function ‘memset’ [-Wimplicit-function-declaration]
+cargo:warning=     memset(ret, 0, size);
+cargo:warning=     ^
+cargo:warning=src/heap/gc/clib_x64.c:6:5: warning: incompatible implicit declaration of built-in function ‘memset’
+cargo:warning=src/heap/gc/clib_x64.c:6:5: note: include ‘<string.h>’ or provide a declaration of ‘memset’
+ExitStatus(ExitStatus(0))
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = None
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+running: "ar" "crus" "/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out/libgc_clib_x64.a" "/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out/src/heap/gc/clib_x64.o"
+cargo:warning=ar: `u' modifier ignored since `D' is the default (see `U')
+ExitStatus(ExitStatus(0))
+cargo:rustc-link-lib=static=gc_clib_x64
+cargo:rustc-link-search=native=/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out
+TARGET = Some("x86_64-unknown-linux-gnu")
+OPT_LEVEL = Some("0")
+PROFILE = Some("debug")
+TARGET = Some("x86_64-unknown-linux-gnu")
+debug=true opt-level=0
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CC_x86_64-unknown-linux-gnu = None
+CC_x86_64_unknown_linux_gnu = None
+HOST_CC = None
+CC = None
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CFLAGS_x86_64-unknown-linux-gnu = None
+CFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CFLAGS = None
+CFLAGS = None
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-g" "-m64" "-fPIC" "-lpfm" "-O3" "-o" "/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out/src/common/perf.o" "-c" "src/common/perf.c"
+ExitStatus(ExitStatus(0))
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = None
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+running: "ar" "crus" "/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out/libgc_perf.a" "/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out/src/common/perf.o"
+cargo:warning=ar: `u' modifier ignored since `D' is the default (see `U')
+ExitStatus(ExitStatus(0))
+cargo:rustc-link-lib=static=gc_perf
+cargo:rustc-link-search=native=/home/tanvir/experiment-rust/target/debug/build/immix_rust-7434cc78d2140102/out

@@ -1,0 +1,112 @@
+heap is 11534336 bytes (immix: 10485760 bytes, lo: 1048576 bytes) . 
+8 gc threads
+*** object rewrite but why? ***
+*** object rewrite but why? ***
+*** object rewrite but why? ***
+*** object rewrite but why? ***
+*** object rewrite but why? ***
+------------------------------------------
+alloc in mutator called 10 
+hash size 5 
+true found size 0 
+true found in used blocks 0 
+true found in usable blocks 0 
+false found size 5 
+false found in used blocks 0 
+false found in usable blocks 0 
+false not in free lines 5 
+false in free lines 0 
+insane in usedblocks true 0 
+insane in usableblocks true  0 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+mutator:
+mutator:
+mutator:
+id    =0
+mutator:
+space =0x7fd0fd680000
+id    =3
+id    =2
+space =0x7fd0fd680000
+cursor=0x0
+limit =0x0
+yield?=2
+cursor=0x0
+id    =1
+space =0x7fd0fd680000
+cursor=0x0
+limit =0x0
+limit =0x0
+yield?=2
+space =0x7fd0fd680000
+cursor=0x0
+limit =0x0
+yield?=2
+yield?=2
+mutator:
+id    =4
+space =0x7fd0fd680000
+cursor=0x0
+limit =0x0
+yield?=2
+mutator:
+id    =2
+space =0x7fd0fd680000
+cursor=0x7fd0fd6a0020
+limit =0x7fd0fd6b0000
+yield?=2
+mutator:
+id    =2
+space =0x7fd0fd680000
+cursor=0x7fd0fd6a0040
+limit =0x7fd0fd6b0000
+yield?=2
+mutator:
+id    =4
+space =0x7fd0fd680000
+cursor=0x7fd0fd6c0020
+limit =0x7fd0fd6d0000
+yield?=2
+mutator:
+id    =4
+space =0x7fd0fd680000
+cursor=0x7fd0fd6c0040
+limit =0x7fd0fd6d0000
+yield?=2
+mutator:
+id    =0
+space =0x7fd0fd680000
+cursor=0x7fd0fd690020
+limit =0x7fd0fd6a0000
+yield?=2
+mutator:
+id    =0
+space =0x7fd0fd680000
+cursor=0x7fd0fd690040
+limit =0x7fd0fd6a0000
+yield?=2
+mutator:
+id    =3
+space =0x7fd0fd680000
+cursor=0x7fd0fd680020
+limit =0x7fd0fd690000
+yield?=2
+mutator:
+id    =3
+space =0x7fd0fd680000
+cursor=0x7fd0fd680040
+limit =0x7fd0fd690000
+yield?=2
+mutator:
+id    =1
+space =0x7fd0fd680000
+cursor=0x7fd0fd6b0020
+limit =0x7fd0fd6c0000
+yield?=2
+mutator:
+id    =1
+space =0x7fd0fd680000
+cursor=0x7fd0fd6b0040
+limit =0x7fd0fd6c0000
+yield?=2

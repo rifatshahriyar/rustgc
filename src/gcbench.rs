@@ -9,10 +9,12 @@ use heap::immix::ImmixMutatorLocal;
 use heap::immix::ImmixSpace;
 use heap::immix::ImmixBlock;
 use heap::immix::myHashMap;
+use heap::immix::myHashMapForLine;
 use heap::immix::LineMark;
 use heap::immix::BYTES_IN_BLOCK;
 use heap::immix::LOG_BYTES_IN_LINE;
-use heap::immix::ALLOC_COUNT;
+use heap::immix::BYTES_IN_LINE;
+use heap::immix::LINES_IN_BLOCK;
 use heap::freelist;
 use heap::freelist::FreeListSpace;
 use std::mem::size_of as size_of;
@@ -22,7 +24,6 @@ use common::Address;
 use std::sync::atomic;
 use std::sync::Arc;
 use std::collections::HashMap;
-use std::sync::atomic::{AtomicBool, Ordering,AtomicUsize};
 
 extern crate time;
 
@@ -198,6 +199,14 @@ pub fn start() {
 
     let mut myhash = myHashMap.write().unwrap();
 
+
+
+    let mut myhashLine = myHashMapForLine.write().unwrap();
+
+  //  let mut myhashLineSanity = myHashMapForLine.write().unwrap();
+
+
+
     let mut usedBlocks = immix_space.used_blocks.lock().unwrap();
     let mut usableBlocks = immix_space.usable_blocks.lock().unwrap();
     let mut freeList = lo_space.write().unwrap();
@@ -212,98 +221,152 @@ pub fn start() {
     let mut count8 = 0;
     let mut count9 = 0;
 
+    
 
-    let mut sanity = 0;
-    let mut insane1 = 0;
-    let mut insane2 = 0;
-    let mut insane3 = 0;
-    let mut insane4 = 0;
 
     for (key, val) in myhash.iter() {
         count = count + 1;
         //println!("iter {}",count2);
         if *val {
             count2 += 1;
-            sanity = 0;
+            
             for element in usedBlocks.iter() {
+                
+                
                 let mut block = element;
+                let line_table_index1 = key.diff(block.start()) >> LOG_BYTES_IN_LINE;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
+                
+            //    println!("address check {}", line_table_index1);
                 if *key >= block.start() && *key <= end {
-                    if sanity==0 {
-                        count8 = count8+1;
-                        sanity = 1;
+                    count8 = count8+1;
+                    
+                    let len = BYTES_IN_LINE;
+                    for i in 0..LINES_IN_BLOCK {
+                        let mut address=block.start().plus(i*BYTES_IN_LINE);
+                        if *key >= address && *key <= address.plus(BYTES_IN_LINE){
+                            //println!("line address check for used block true {}", address);
+
+                            if myhashLine.contains_key(&address) == true {
+                                let mut v = myhashLine[&address]+1;
+                                myhashLine.remove(&address);
+                                myhashLine.insert(address,v);
+                            }
+                            else{
+                                myhashLine.insert(address,1);
+                            } 
+                        //    let mut v = myhashLineSanity[&address]+1;
+                        //    myhashLineSanity.remove(&address);
+                        //    myhashLineSanity.insert(address,++1);
+                        }
                     }
-                    else {
-                      //  println!("insane usedBlocks true");
-                        insane1 += 1;
-                    }
+                    
+                    break;
                 }
+                
 
             }
-            sanity = 0;
+        //    println!("");
             for element in usableBlocks.iter() {
+            //    let mut address1=0;
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
+                let len = BYTES_IN_LINE;
+            //    address1 = address1+len;
                 if *key >= block.start() && *key <= end {
-                    if sanity==0 {
-                        count6 = count6+1;
-                        sanity = 1;
+                    count6 = count6+1;
+             //       println!("line address check for usable block true {}", address1);
+                    let len = BYTES_IN_LINE;
+                    for i in 0..LINES_IN_BLOCK {
+                        let mut address=block.start().plus(i*BYTES_IN_LINE);
+                        if *key >= address && *key <= address.plus(BYTES_IN_LINE){
+                           // println!("line address check for usable block true {}", address);
+                       //     let mut v = myhashLineSanity[&address]+1;
+                       //     myhashLineSanity.remove(&address);
+                       //     myhashLineSanity.insert(address,v);
+                            if myhashLine.contains_key(&address) == true {
+                                let mut v = myhashLine[&address]+1;
+                                myhashLine.remove(&address);
+                                myhashLine.insert(address,v);
+                            }
+                            else{
+                                myhashLine.insert(address,1);
+                            }
+                        }
                     }
-                    else {
-                     //   println!("insane usableBlocks true");
-                        insane2 += 1;
-                    }
+                    break;
                 }
 
             }
+        //    println!("");
         }
         else{
             count3 = count3 + 1;
-            sanity = 0;
             for element in usedBlocks.iter() {
+             //   let mut address2=0;
                 let mut block = element;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
+                let len = BYTES_IN_LINE;
+            //    address2 = address2+len;
                 if *key >= block.start() && *key <= end {
-                    if sanity==0 {
-                        count5 = count5+1;
-                        sanity = 1;
+                    count5 = count5+1;
+            //        println!("line address check for used block false {}", address2);
+                    let len = BYTES_IN_LINE;
+                    for i in 0..LINES_IN_BLOCK {
+                        let mut address=block.start().plus(i*BYTES_IN_LINE);
+                        if *key >= address && *key <= address.plus(BYTES_IN_LINE){
+                         //   println!("line address check for used block false{}", address);
+                   //         let mut v = myhashLineSanity[&address]+1;
+                   //         myhashLineSanity.remove(&address);
+                   //         myhashLineSanity.insert(address,v);
+                        }
                     }
-                    else {
-                       insane3 += 1;
-                    }
+                    break;
                 }
 
             }
-            sanity = 0;
+        //    println!("");
             for element in usableBlocks.iter() {
+             //   let mut address3=0;
                 let mut block = element;
+                let len = BYTES_IN_LINE;
+             //   address3 = address3+len;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    if sanity==0 {
-                        count7 = count7+1;
-                        sanity = 1;
+                    count7 = count7+1;
+            //        println!("line address check for usable block false {}", address3);
+                    let len = BYTES_IN_LINE;
+                    for i in 0..LINES_IN_BLOCK {
+                        let mut address=block.start().plus(i*BYTES_IN_LINE);
+                        if *key >= address && *key <= address.plus(BYTES_IN_LINE){
+                       //     println!("line address check for usable block false {}", address);
+                    //        let mut v = myhashLineSanity[&address]+1;
+                    //        myhashLineSanity.remove(&address);
+                    //        myhashLineSanity.insert(address,v);
+                        }
                     }
-                    else {
-                        insane4 += 1;
-                    }
+                    break;
                 }
 
             }
-            let line_table_index = key.diff(immix_space.start()) >> LOG_BYTES_IN_LINE;            
-            let markValue = immix_space.line_mark_table().get(line_table_index);
-
-            if markValue != LineMark::Free {
-                count4 += 1;
-            }
-
-            if markValue == LineMark::Free {
-                count9 += 1;
-            }
+         //   println!("");
             
+            
+        }
+        let line_table_index = key.diff(immix_space.start()) >> LOG_BYTES_IN_LINE;            
+        let markValue = immix_space.line_mark_table().get(line_table_index);
+    //    let address= immix_space.line_mark_table().take_slice(line_table_index << LOG_BYTES_IN_LINE, 256);
+
+        if markValue != LineMark::Free {
+            count4 += 1;
+        }
+
+        if markValue == LineMark::Free {
+            count9 += 1;
         }
     }
     println!("------------------------------------------");
-    println!("alloc in mutator called {} ", ALLOC_COUNT.load(Ordering::SeqCst));
+    println!("alloc in gc called {} ", unsafe { OBJ_COUNT } );
     println!("hash size {} ", count);
     println!("true found size {} ", count2);
     println!("true found in used blocks {} ", count8 );
@@ -316,10 +379,8 @@ pub fn start() {
     println!("false not in free lines {} ",count4);
     println!("false in free lines {} ",count9);
 
-
-    println!("insane in usedblocks true {} ",insane1);
-    println!("insane in usableblocks true  {} ",insane2);
-    println!("insane in usedblocks false {} ",insane3);
-    println!("insane in usableblocks false  {} ",insane4);
+    //for (key,val) in myhashLine.iter(){
+    //    println!("TRUE OBJECT LINE ADDRESS {} COUNT VALUE {} ", key, val);
+    //}
 
 }
