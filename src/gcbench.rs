@@ -221,7 +221,11 @@ pub fn start() {
     let mut count8 = 0;
     let mut count9 = 0;
 
-    
+    let mut sanity = 0;
+    let mut insane1 = 0;
+    let mut insane2 = 0;
+    let mut insane3 = 0;
+    let mut insane4 = 0;    
 
 
     for (key, val) in myhash.iter() {
@@ -229,7 +233,7 @@ pub fn start() {
         //println!("iter {}",count2);
         if *val {
             count2 += 1;
-            
+            sanity = 0;
             for element in usedBlocks.iter() {
                 
                 
@@ -238,14 +242,24 @@ pub fn start() {
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 
             //    println!("address check {}", line_table_index1);
+
                 if *key >= block.start() && *key <= end {
-                    count8 = count8+1;
+                    //count8 = count8+1;
                     
                     let len = BYTES_IN_LINE;
                     for i in 0..LINES_IN_BLOCK {
                         let mut address=block.start().plus(i*BYTES_IN_LINE);
                         if *key >= address && *key <= address.plus(BYTES_IN_LINE){
                             //println!("line address check for used block true {}", address);
+                            if sanity==0 {
+                                count8 = count8+1;
+                                sanity = 1;
+                            }
+                            else {
+                            //  println!("insane usedBlocks true");
+                                insane1 += 1;
+                            }
+
 
                             if myhashLine.contains_key(&address) == true {
                                 let mut v = myhashLine[&address]+1;
@@ -267,6 +281,7 @@ pub fn start() {
 
             }
         //    println!("");
+            sanity = 0;
             for element in usableBlocks.iter() {
             //    let mut address1=0;
                 let mut block = element;
@@ -274,7 +289,7 @@ pub fn start() {
                 let len = BYTES_IN_LINE;
             //    address1 = address1+len;
                 if *key >= block.start() && *key <= end {
-                    count6 = count6+1;
+               //     count6 = count6+1;
              //       println!("line address check for usable block true {}", address1);
                     let len = BYTES_IN_LINE;
                     for i in 0..LINES_IN_BLOCK {
@@ -284,6 +299,14 @@ pub fn start() {
                        //     let mut v = myhashLineSanity[&address]+1;
                        //     myhashLineSanity.remove(&address);
                        //     myhashLineSanity.insert(address,v);
+                            if sanity==0 {
+                                count6 = count6+1;
+                                sanity = 1;
+                            }
+                            else {
+                     //   println!("insane usableBlocks true");
+                                insane2 += 1;
+                            }
                             if myhashLine.contains_key(&address) == true {
                                 let mut v = myhashLine[&address]+1;
                                 myhashLine.remove(&address);
@@ -308,9 +331,17 @@ pub fn start() {
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 let len = BYTES_IN_LINE;
             //    address2 = address2+len;
+                sanity = 0;
                 if *key >= block.start() && *key <= end {
-                    count5 = count5+1;
+                    //count5 = count5+1;
             //        println!("line address check for used block false {}", address2);
+                    if sanity==0 {
+                        count5 = count5+1;
+                        sanity = 1;
+                    }
+                    else {
+                       insane3 += 1;
+                    }
                     let len = BYTES_IN_LINE;
                     for i in 0..LINES_IN_BLOCK {
                         let mut address=block.start().plus(i*BYTES_IN_LINE);
@@ -326,6 +357,7 @@ pub fn start() {
 
             }
         //    println!("");
+            sanity = 0;
             for element in usableBlocks.iter() {
              //   let mut address3=0;
                 let mut block = element;
@@ -333,7 +365,16 @@ pub fn start() {
              //   address3 = address3+len;
                 let end =  block.start().plus(BYTES_IN_BLOCK);
                 if *key >= block.start() && *key <= end {
-                    count7 = count7+1;
+                    //count7 = count7+1;
+                    if *key >= block.start() && *key <= end {
+                        if sanity==0 {
+                            count7 = count7+1;
+                            sanity = 1;
+                        }
+                        else {
+                            insane4 += 1;
+                        }
+                    }
             //        println!("line address check for usable block false {}", address3);
                     let len = BYTES_IN_LINE;
                     for i in 0..LINES_IN_BLOCK {
@@ -379,8 +420,28 @@ pub fn start() {
     println!("false not in free lines {} ",count4);
     println!("false in free lines {} ",count9);
 
-    //for (key,val) in myhashLine.iter(){
-    //    println!("TRUE OBJECT LINE ADDRESS {} COUNT VALUE {} ", key, val);
-    //}
+    println!(" size of used blocks {}", usedBlocks.len());
+    println!(" size of usable blocks {}", usableBlocks.len());
+
+
+    println!("insane in usedblocks true {} ",insane1);
+    println!("insane in usableblocks true  {} ",insane2);
+    println!("insane in usedblocks false {} ",insane3);
+    println!("insane in usableblocks false  {} ",insane4);
+    
+    let mut good = 0;
+    let mut bad = 0;
+    for (key,val) in myhashLine.iter(){
+        if (*val >= 11){
+            good += 1;
+        }
+        else {
+            bad += 1;
+        }
+        //println!("TRUE OBJECT LINE ADDRESS {} COUNT VALUE {} ", key, val);
+    }
+    let total = good+bad;
+    let percentage = 100.0 * good as f64 / total as f64;
+    println!("true lines {} false lines {} total {} percentage {}",good, bad,total ,percentage);
 
 }

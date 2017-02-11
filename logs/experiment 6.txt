@@ -1,0 +1,48 @@
+size 75 
+true lines 7839 false lines 164 total 8003 percentage 97.95076846182681
+size 80 
+483 true lines 10473 false lines 160 total 10633 percentage 98.49525063481614
+size 85 
+8 true lines 27207 false lines 252 total 27459 percentage 99.08226810881678
+size 90 
+ue lines 744 false lines 130 total 874 percentage 85.1258581235698
+size 95 
+true lines 895 false lines 130 total 1025 percentage 87.3170731707317
+size 100
+767 true lines 1959 false lines 114 total 2073 percentage 94.50072358900145
+size 110
+true lines 3523 false lines 127 total 3650 percentage 96.52054794520548
+size 120
+s 492 true lines 8785 false lines 103 total 8888 percentage 98.84113411341134
+size 130
+ks 980 true lines 14997 false lines 125 total 15122 percentage 99.17338976325883
+size 150
+true lines 108 false lines 60 total 168 percentage 64.28571428571429
+size 160
+6 true lines 100 false lines 64 total 164 percentage 60.97560975609756
+size 180
+294 true lines 134 false lines 63 total 197 percentage 68.02030456852792
+size 220
+ue lines 425 false lines 36 total 461 percentage 92.19088937093275
+size 250
+3 true lines 449 false lines 20 total 469 percentage 95.73560767590618
+size 280
+1550 true lines 696 false lines 30 total 726 percentage 95.86776859504133
+size 300
+cks 2059 true lines 1519 false lines 25 total 1544 percentage 98.38082901554404
+size 310
+
+size 330
+cks 2818 true lines 3820 false lines 54 total 3874 percentage 98.60609189468249
+size 350
+cks 3316 true lines 7362 false lines 74 total 7436 percentage 99.00484131253361
+size 370
+ocks 3837 true lines 5300 false lines 52 total 5352 percentage 99.02840059790732
+size 380
+ocks 4085 true lines 7316 false lines 50 total 7366 percentage 99.3212055389628
+size 400
+blocks 4581 true lines 11435 false lines 80 total 11515 percentage 99.30525401650021
+size 420
+ocks 5041 true lines 24720 false lines 148 total 24868 percentage 99.40485764838347
+size 450
+ false lines 0 total 0 percentage NaN

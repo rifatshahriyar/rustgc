@@ -1,0 +1,69 @@
+-------------------------------------------------------------------------------
+heap is 78643200 bytes (immix: 62914560 bytes, lo: 15728640 bytes) . 
+true lines 8191 false lines 195 total 8386 percentage 97.67469592177439
+-------------------------------------------------------------------------------
+heap is 83886080 bytes (immix: 67108864 bytes, lo: 16777216 bytes) . 
+true lines 10201 false lines 173 total 10374 percentage 98.33236938500096
+-------------------------------------------------------------------------------
+heap is 89128960 bytes (immix: 71303168 bytes, lo: 17825792 bytes) . 
+true lines 27455 false lines 240 total 27695 percentage 99.13341758440151
+-------------------------------------------------------------------------------
+heap is 94371840 bytes (immix: 75497472 bytes, lo: 18874368 bytes) . 
+true lines 1494 false lines 144 total 1638 percentage 91.20879120879121
+-------------------------------------------------------------------------------
+heap is 99614720 bytes (immix: 79691776 bytes, lo: 19922944 bytes) . 
+true lines 1105 false lines 127 total 1232 percentage 89.69155844155844
+-------------------------------------------------------------------------------
+heap is 104857600 bytes (immix: 83886080 bytes, lo: 20971520 bytes) . 
+true lines 1536 false lines 116 total 1652 percentage 92.97820823244552
+-------------------------------------------------------------------------------
+heap is 115343360 bytes (immix: 92274688 bytes, lo: 23068672 bytes) . 
+true lines 3598 false lines 118 total 3716 percentage 96.82454251883746
+-------------------------------------------------------------------------------
+heap is 125829120 bytes (immix: 100663296 bytes, lo: 25165824 bytes) . 
+true lines 8821 false lines 112 total 8933 percentage 98.74622187395052
+-------------------------------------------------------------------------------
+heap is 136314880 bytes (immix: 109051904 bytes, lo: 27262976 bytes) . 
+true lines 109 false lines 66 total 175 percentage 62.285714285714285
+-------------------------------------------------------------------------------
+heap is 167772160 bytes (immix: 134217728 bytes, lo: 33554432 bytes) . 
+true lines 115 false lines 75 total 190 percentage 60.526315789473685
+-------------------------------------------------------------------------------
+heap is 188743680 bytes (immix: 150994944 bytes, lo: 37748736 bytes) . 
+true lines 183 false lines 63 total 246 percentage 74.39024390243902
+-------------------------------------------------------------------------------
+heap is 230686720 bytes (immix: 184549376 bytes, lo: 46137344 bytes) . 
+true lines 425 false lines 36 total 461 percentage 92.19088937093275
+-------------------------------------------------------------------------------
+heap is 262144000 bytes (immix: 209715200 bytes, lo: 52428800 bytes) . 
+true lines 449 false lines 22 total 471 percentage 95.32908704883228
+-------------------------------------------------------------------------------
+heap is 293601280 bytes (immix: 234881024 bytes, lo: 58720256 bytes) . 
+true lines 696 false lines 29 total 725 percentage 96
+-------------------------------------------------------------------------------
+heap is 314572800 bytes (immix: 251658240 bytes, lo: 62914560 bytes) . 
+true lines 2319 false lines 38 total 2357 percentage 98.38778107764107
+-------------------------------------------------------------------------------
+heap is 325058560 bytes (immix: 260046848 bytes, lo: 65011712 bytes) . 
+true lines 2070 false lines 27 total 2097 percentage 98.71244635193133
+-------------------------------------------------------------------------------
+heap is 346030080 bytes (immix: 276824064 bytes, lo: 69206016 bytes) . 
+true lines 3867 false lines 45 total 3912 percentage 98.84969325153374
+-------------------------------------------------------------------------------
+heap is 367001600 bytes (immix: 293601280 bytes, lo: 73400320 bytes) . 
+true lines 5823 false lines 69 total 5892 percentage 98.82892057026477
+-------------------------------------------------------------------------------
+heap is 387973120 bytes (immix: 310378496 bytes, lo: 77594624 bytes) . 
+true lines 8370 false lines 67 total 8437 percentage 99.20587886689582
+-------------------------------------------------------------------------------
+heap is 398458880 bytes (immix: 318767104 bytes, lo: 79691776 bytes) . 
+true lines 7335 false lines 50 total 7385 percentage 99.322951929587
+-------------------------------------------------------------------------------
+heap is 419430400 bytes (immix: 335544320 bytes, lo: 83886080 bytes) . 
+true lines 11433 false lines 81 total 11514 percentage 99.29650859822824
+-------------------------------------------------------------------------------
+heap is 440401920 bytes (immix: 352321536 bytes, lo: 88080384 bytes) . 
+true lines 24719 false lines 144 total 24863 percentage 99.42082612717692
+-------------------------------------------------------------------------------
+heap is 471859200 bytes (immix: 377487360 bytes, lo: 94371840 bytes) . 
+true lines 0 false lines 0 total 0 percentage NaN

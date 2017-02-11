@@ -1,0 +1,72 @@
+-------------------------------------------------------------------------------
+heap size 75 
+insane in usedblocks true 3214 
+insane in usableblocks true  82 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 9813 false lines 164 total 9977 percentage 98.35621930440011
+-------------------------------------------------------------------------------
+heap size 85 
+insane in usedblocks true 8874 
+insane in usableblocks true  237 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 27244 false lines 239 total 27483 percentage 99.1303715023833
+-------------------------------------------------------------------------------
+heap size 100 
+size of used blocks 510
+size of usable blocks 769
+insane in usedblocks true 398 
+insane in usableblocks true  156 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 1610 false lines 120 total 1730 percentage 93.0635838150289
+-------------------------------------------------------------------------------
+heap size 130 
+insane in usedblocks true 4814 
+insane in usableblocks true  180 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 14925 false lines 134 total 15059 percentage 99.11016667773424
+-------------------------------------------------------------------------------
+heap size 160 
+insane in usedblocks true 30 
+insane in usableblocks true  10 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 100 false lines 68 total 168 percentage 59.523809523809526
+-------------------------------------------------------------------------------
+heap size 220 
+insane in usedblocks true 139 
+insane in usableblocks true  5 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 425 false lines 34 total 459 percentage 92.5925925925926
+-------------------------------------------------------------------------------
+heap size 300 
+insane in usedblocks true 340 
+insane in usableblocks true  169 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 1521 false lines 28 total 1549 percentage 98.19238218205294
+-------------------------------------------------------------------------------
+heap size 350 
+insane in usedblocks true 2296 
+insane in usableblocks true  159 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 7359 false lines 63 total 7422 percentage 99.15117219078415
+-------------------------------------------------------------------------------
+heap size 400 
+insane in usedblocks true 3570 
+insane in usableblocks true  258 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 11480 false lines 75 total 11555 percentage 99.3509303331891
+-------------------------------------------------------------------------------
+heap size 450 
+insane in usedblocks true 0 
+insane in usableblocks true  0 
+insane in usedblocks false 0 
+insane in usableblocks false  0 
+true lines 0 false lines 0 total 0 percentage NaN

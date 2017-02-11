@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "immix_rust.h"
 
-#define N_ALLOCATION_THREADS 5
+#define N_ALLOCATION_THREADS 100
 
 void* new_allocation_thread(void*);
 void allocation_once(struct Mutator* m);
@@ -30,12 +30,13 @@ int main() {
 void* new_allocation_thread(void* arg) {
     // creating a new mutator
     struct Mutator* m = new_mutator();
-
+    int i;
     // set current stack pointer as a limit for conservative stack scanning
     // (stack scanning won't traverse beyond the limit)
     set_low_water_mark();
 
     // main allocation loop
+    for (i=0;i<45;i++)
     allocation_once(m);
 
     // if the allocation finishes, we destroy the mutator
@@ -53,15 +54,18 @@ void print_mutator(struct Mutator* m) {
 }
 
 void allocation_once(struct Mutator* m) {
-    print_mutator(m);
-    uint64_t addr = alloc(&m, 32, 8);
+    //print_mutator(m);
+    uint64_t addr;
     //printf("RETURN1 = %llx\n", addr);
     
-    print_mutator(m);
+    //print_mutator(m);
+    //for (int i=0;i<45;i++)
     addr = alloc(&m, 32, 8);
+    
+    
     //printf("RETURN2 = %llx\n", addr);
     
-    print_mutator(m);
+    //print_mutator(m);
 }
 
 void allocation_loop(struct Mutator* m) {

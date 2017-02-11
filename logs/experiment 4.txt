@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+heap is 78643200 bytes (immix: 62914560 bytes, lo: 15728640 bytes) . 
+true lines 5495 false lines 143 total 5638 percentage 97.46363958850657
+-------------------------------------------------------------------------------
+heap is 89128960 bytes (immix: 71303168 bytes, lo: 17825792 bytes) . 
+true lines 27377 false lines 243 total 27620 percentage 99.12020275162925
+-------------------------------------------------------------------------------
+heap is 104857600 bytes (immix: 83886080 bytes, lo: 20971520 bytes) . 
+true lines 1942 false lines 135 total 2077 percentage 93.50024073182475
+-------------------------------------------------------------------------------
+heap is 136314880 bytes (immix: 109051904 bytes, lo: 27262976 bytes) . 
+true lines 14970 false lines 133 total 15103 percentage 99.11938025557836
+-------------------------------------------------------------------------------
+heap is 167772160 bytes (immix: 134217728 bytes, lo: 33554432 bytes) . 
+true lines 105 false lines 66 total 171 percentage 61.40350877192982
+-------------------------------------------------------------------------------
+heap is 230686720 bytes (immix: 184549376 bytes, lo: 46137344 bytes) . 
+true lines 427 false lines 39 total 466 percentage 91.63090128755364
+-------------------------------------------------------------------------------
+heap is 314572800 bytes (immix: 251658240 bytes, lo: 62914560 bytes) . 
+true lines 1519 false lines 27 total 1546 percentage 98.25355756791721
+-------------------------------------------------------------------------------
+heap is 367001600 bytes (immix: 293601280 bytes, lo: 73400320 bytes) . 
+true lines 5822 false lines 61 total 5883 percentage 98.96311405745368
+-------------------------------------------------------------------------------
+heap is 419430400 bytes (immix: 335544320 bytes, lo: 83886080 bytes) . 
+true lines 11433 false lines 75 total 11508 percentage 99.34827945776851
+-------------------------------------------------------------------------------
+heap is 471859200 bytes (immix: 377487360 bytes, lo: 94371840 bytes) . 
+true lines 0 false lines 0 total 0 percentage NaN

@@ -21,9 +21,10 @@ mod obj_init;
 fn main() {
     use heap;
     objectmodel::init();
-    let heap_size : usize = 150 << 20;      // x << 20 means x megabytes  220
+    let heap_size : usize = 300 << 20;
     let n_gcthreads = 8;
-    
+
+
     let immix_space_size : usize = (heap_size as f64  * heap::IMMIX_SPACE_RATIO) as usize;
     heap::IMMIX_SPACE_SIZE.store(immix_space_size, Ordering::SeqCst);
     
@@ -31,6 +32,7 @@ fn main() {
     heap::LO_SPACE_SIZE.store(lo_space_size, Ordering::SeqCst);
     
     println!("-------------------------------------------------------------------------------");
+    println!("heap size {} ",heap_size>>20);
     println!("heap is {} bytes (immix: {} bytes, lo: {} bytes) . ", heap_size, immix_space_size, lo_space_size);
            
     heap::gc::GC_THREADS.store(n_gcthreads,Ordering::SeqCst);
@@ -59,3 +61,4 @@ fn main() {
     }
 
 }
+

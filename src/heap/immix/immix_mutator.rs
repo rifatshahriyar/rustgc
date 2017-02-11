@@ -131,17 +131,18 @@ impl ImmixMutatorLocal {
         let start = self.cursor.align_up(align);
         let end = start.plus(size);
         let mut hash = &myHashMap;
-        ALLOC_COUNT.store(ALLOC_COUNT.load(atomic::Ordering::SeqCst)+1,atomic::Ordering::SeqCst);
+        //ALLOC_COUNT.store(ALLOC_COUNT.load(atomic::Ordering::SeqCst)+1,atomic::Ordering::SeqCst);
         // println!("cursor = {:#X}, after align = {:#X}", c, start);
         
         if end > self.limit {
             let start2 = self.try_alloc_from_local(size, align);
             if hash.write().unwrap().contains_key(&start) == true {
-                println!("*** object rewrite but why? {} ***",start2.as_usize());
+                //println!("*** object rewrite but why? {} ***",start2.as_usize());
             }
             if hash.write().unwrap().contains_key(&start) == false {
-                println!("*** object not rewritten {} ***",start2.as_usize());
+                //println!("*** object not rewritten {} ***",start2.as_usize());
                 hash.write().unwrap().insert(start2,false);
+                ALLOC_COUNT.store(ALLOC_COUNT.load(atomic::Ordering::SeqCst)+1,atomic::Ordering::SeqCst);
             }
             //hash.read();
             start2
@@ -149,6 +150,7 @@ impl ImmixMutatorLocal {
 //            fill_alignment_gap(self.cursor, start);
             self.cursor = end;
             hash.write().unwrap().insert(start,false);
+            ALLOC_COUNT.store(ALLOC_COUNT.load(atomic::Ordering::SeqCst)+1,atomic::Ordering::SeqCst);
             //hash.read();
             start            
         }
